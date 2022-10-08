@@ -2,16 +2,16 @@ package com.steadev.plugins.amplitude
 
 import androidx.appcompat.app.AppCompatActivity
 import com.amplitude.api.Amplitude
-import com.amplitude.api.AmplitudeClient
+import com.getcapacitor.JSObject
 
 class CapacitorAmplitude(var activity: AppCompatActivity) {
     fun init(instanceName: String?, apiKey: String?) {
         Amplitude.getInstance(instanceName).initialize(activity, apiKey)
     }
 
-    fun setUserProperties(instanceName: String?, userProperties: Any?) {
+    fun setUserProperties(instanceName: String?, userProperties: JSObject?) {
         val client = Amplitude.getInstance(instanceName)
-//        client.setUserProperties(properties)
+        client.setUserProperties(userProperties)
     }
 
     fun clearUserProperties(instanceName: String?) {
@@ -29,8 +29,8 @@ class CapacitorAmplitude(var activity: AppCompatActivity) {
         client.logEvent(eventType)
     }
 
-    fun logEventWithProperties(instanceName: String?, eventType: String?, eventProperties: Any?) {
+    fun logEventWithProperties(instanceName: String?, eventType: String?, eventProperties: JSObject?) {
         val client = Amplitude.getInstance(instanceName)
-//        client.logEvent(eventType, eventProperties)
+        client.logEvent(eventType, eventProperties)
     }
 }

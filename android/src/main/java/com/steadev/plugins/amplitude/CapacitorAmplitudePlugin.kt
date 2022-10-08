@@ -6,6 +6,7 @@ import com.steadev.plugins.amplitude.CapacitorAmplitude
 import com.getcapacitor.PluginMethod
 import com.getcapacitor.PluginCall
 import androidx.appcompat.app.AppCompatActivity
+import com.getcapacitor.JSObject
 
 @CapacitorPlugin(name = "CapacitorAmplitude")
 class CapacitorAmplitudePlugin : Plugin() {
@@ -17,7 +18,7 @@ class CapacitorAmplitudePlugin : Plugin() {
     }
 
     @PluginMethod
-    fun init(call: PluginCall) {
+    fun initialize(call: PluginCall) {
         val instanceName = call.getString("instanceName")
         val apiKey = call.getString("apiKey")
         implementation.init(instanceName, apiKey)
@@ -27,7 +28,7 @@ class CapacitorAmplitudePlugin : Plugin() {
     @PluginMethod
     fun setUserProperties(call: PluginCall) {
         val instanceName = call.getString("instanceName")
-        val userProperties: Any = call.getObject("userProperties")
+        val userProperties: JSObject = call.getObject("userProperties")
         implementation.setUserProperties(instanceName, userProperties)
         call.resolve()
     }
@@ -58,7 +59,7 @@ class CapacitorAmplitudePlugin : Plugin() {
     fun logEventWithProperties(call: PluginCall) {
         val instanceName = call.getString("instanceName")
         val eventType = call.getString("eventType")
-        val eventProperties: Any = call.getObject("eventProperties")
+        val eventProperties: JSObject = call.getObject("eventProperties")
         implementation.logEventWithProperties(instanceName, eventType, eventProperties)
         call.resolve()
     }
